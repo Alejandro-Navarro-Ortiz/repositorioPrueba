@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p id="demo"></p>
+
+<script>
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        myFunction(this);
+    }
+};
+xhttp.open("GET", "empresa.xml", true);
+xhttp.send();
+
+function myFunction(xml) {
+    var xmlDoc = xml.responseXML;
+    var x = get_firstChild(xmlDoc.getElementsByTagName("empleado")[0]); // primer empleado
+    document.getElementById("demo").innerHTML = x.nodeName;
+}
+
+//check if the first node is an element node
+function get_firstChild(n) {
+    var y = n.firstChild;
+    while (y.nodeType != 1) {
+        y = y.nextSibling;
+    }
+    return y;
+}
+</script>
+
+</body>
+</html>

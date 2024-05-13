@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="demo"></h1>
+    <script>
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                myFunction(this);
+            }
+        };
+        xhttp.open("GET", "empresa.xml", true);
+        xhttp.send();
+
+        function myFunction(xml) {
+            var xmlDoc = xml.responseXML;
+            var empleado = xmlDoc.getElementsByTagName("empleado")[0];
+            var contenidoEmpleado = "";
+
+            var infoEmpleado = empleado.childNodes;
+            for(var i=0;i< infoEmpleado.length; i++){
+                contenidoEmpleado += "<p><strong>" + infoEmpleado[i].nodeName + ":</strong> " + infoEmpleado[i].textContent + "</p>";
+            }
+            document.getElementById("demo").innerHTML = contenidoEmpleado;
+        }
+    </script> 
+</body>
+</html>
